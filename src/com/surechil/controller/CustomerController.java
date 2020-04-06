@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.surechil.entity.Customer;
 import com.surechil.service.CustomerService;
@@ -49,12 +50,34 @@ public class CustomerController {
 
 	@PostMapping("/saveCustomer")
 	public String saveCustomer(@ModelAttribute("customer") Customer theCustomer) {
-		
-		
-		//save the Customer using our service
+
+		// save the Customer using our service
 		customerService.saveCustomer(theCustomer);
 
-		return "redirect:/list";
+		return "redirect:/customer/list";
+	}
+
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam("customerId") int theId, Model theModel) {
+
+		// get the customer from Database from our Service
+
+		Customer theCustomer = customerService.getCustomers(theId);
+
+		// set Customer as Model attribute to pre-populate the form
+		theModel.addAttribute("customer", theCustomer);
+
+		// send over to our customer form
+		return "customer-form";
+	}
+
+	@GetMapping("/delete")
+	public String deleteCustomer(@RequestParam("customerId") int theId) {
+
+		// delete the Customer
+		customerService.deleteCustomer(theId);
+
+		return "redirect:/customer/list";
 	}
 
 }

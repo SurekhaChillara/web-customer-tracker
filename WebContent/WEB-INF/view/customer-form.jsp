@@ -22,6 +22,11 @@
 		<h3>Save Customer</h3>
 		<form:form action="saveCustomer" modelAttribute="customer"
 			method="POST">
+
+			<!-- associate this id to check the existing customer -->
+			<form:hidden path="id" />
+
+
 			<table>
 				<tbody>
 					<tr>
@@ -36,17 +41,18 @@
 						<td><label>Email:</label></td>
 						<td><form:input path="email" /></td>
 					</tr>
-					
+
 					<td><label></label></td>
-						<td><input type="submit" value="Save" class="save"/></td>
+					<td><input type="submit" value="Save" class="save" /></td>
 				</tbody>
 			</table>
 		</form:form>
-		
-		<div style="clear"; "both"></div>
+
+		<div style=""; "both"></div>
 		<p>
-			<a href="${pageContext.request.contextPath}/customer/list">Back to Customer's List</a>
-			</p>
+			<a href="${pageContext.request.contextPath}/customer/list">Back
+				to Customer's List</a>
+		</p>
 	</div>
 </body>
 </html>
